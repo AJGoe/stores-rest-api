@@ -24,11 +24,6 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 api = Api(app) # allow to add the resources to it
 # The API works with resources and every resource has to be a class
 
-# Flask decorator
-@ app.before_first_request # runs the method below before the first request into this app is made
-def create_tables():
-    db.create_all()
-
 # initialising the JWT object >
 jwt = JWT(app, authenticate, identity) # /auth; uses app + identity functions > to allow the authentification of the users
 # JWT creates a new endpoint >/auth > when called, we send it a username + a password > JWT extension gets that username + password > sends it to the authenticate function > find the correct user object > compare password to the one received through the auth endpoint > if match > return user > becomes sort of the identity
