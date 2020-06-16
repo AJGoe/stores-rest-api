@@ -1,3 +1,6 @@
+import os # operating system > access to the operating's system's environment variables
+
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -14,7 +17,7 @@ app = Flask(__name__)
 app.secret_key = 'yves' # keep secret and secure; do not publish with code
 
 # tell SQLAlchemy where to find the data.db file
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' #  The SQLAlchemy db is at the root folder of the project
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') # os.environ.get('DATABASE_URL') > goes to the operating system > asks for the environment variable in Heroku  > uses the variable for the apps Cofig value > for the connects to postgres app; if db_URL is not defined it still runs locally > 'sqlite...'
 
 # specify a config property > turns off the flask SQLAlchemy modification tracker (it does not turn off the SQLAlchemy modification tracker which is better)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
